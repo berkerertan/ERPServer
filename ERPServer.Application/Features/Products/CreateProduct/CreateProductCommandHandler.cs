@@ -23,7 +23,7 @@ internal sealed class CreateProductCommandHandler(
         await productRepository.AddAsync(product,cancellationToken);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return "Ürün başarıyla oluşturuldu."
+        return "Ürün başarıyla oluşturuldu.";
     }
 }
 

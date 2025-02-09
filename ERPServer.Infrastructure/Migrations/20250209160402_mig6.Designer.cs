@@ -4,6 +4,7 @@ using ERPServer.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ERPServer.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250209160402_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,8 +183,6 @@ namespace ERPServer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Recipes");
                 });
 
@@ -229,17 +230,6 @@ namespace ERPServer.Infrastructure.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("ERPServer.Domain.Entities.Recipe", b =>
-                {
-                    b.HasOne("ERPServer.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("ERPServer.Domain.Entities.RecipeDetail", b =>
                 {
                     b.HasOne("ERPServer.Domain.Entities.Product", "Product")
@@ -249,7 +239,7 @@ namespace ERPServer.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("ERPServer.Domain.Entities.Recipe", null)
-                        .WithMany("Details")
+                        .WithMany("RecipeDetails")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -259,7 +249,7 @@ namespace ERPServer.Infrastructure.Migrations
 
             modelBuilder.Entity("ERPServer.Domain.Entities.Recipe", b =>
                 {
-                    b.Navigation("Details");
+                    b.Navigation("RecipeDetails");
                 });
 #pragma warning restore 612, 618
         }
