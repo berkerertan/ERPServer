@@ -34,11 +34,6 @@ namespace ERPServer.WebAPI.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Update(UpdateRecipeCommand request, CancellationToken cancellationToken)
-        //{
-        //    var response = await _mediator.Send(request, cancellationToken);
-        //    return StatusCode(response.StatusCode, response);
-        //}
+ 
     }
 }
